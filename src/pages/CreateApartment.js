@@ -9,6 +9,7 @@ class CreateApartment extends Component {
     this.auth = new AuthService()
     this.state = {
       apartment: {
+        user_id: this.auth.getUserId(),
         street1: "",
         street2: "",
         city: "",
@@ -24,6 +25,7 @@ class CreateApartment extends Component {
 
   render () {
     let {
+      user_id,
       street1,
       street2,
       city,
@@ -34,9 +36,19 @@ class CreateApartment extends Component {
       manager_phone,
       manager_hours
     } = this.state.apartment
+
+    console.log(this.state.apartment);
     return(
       <div>
       <Form horizontal onSubmit={this.onSubmit}>
+        <FormGroup controlId="formHorizontalUserID">
+          <Col componentClass={ControlLabel} sm={2}>
+          </Col>
+          <Col sm={10}>
+            <FormControl onChange={this.onChange} name="user_id" type="hidden" placeholder="User ID" />
+          </Col>
+        </FormGroup>
+
         <FormGroup controlId="formHorizontalStreet1">
           <Col componentClass={ControlLabel} sm={2}>
             Street 1

@@ -23,12 +23,31 @@ class Apartment extends Component {
 
   render() {
     console.log(this.state.apartment)
-    return (
-      <div>
-        just one apartment
-      </div>
-    )
-  }
+    let { apartment } = this.state
+      if (this.state.apartment != undefined) {
+        return (
+          <div>
+            {apartment.street1}
+            <br/>
+            {apartment.street2}
+            <br/>
+            {apartment.city}, {apartment.state}, {apartment.postal_code}
+            <br/>
+            <br/>
+            {apartment.building_manager}: {apartment.manager_phone}, office hours: {apartment.manager_hours}
+            <br/>
+            <br/>
+            <br/>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            page loading
+          </div>
+        )
+      }
+    }
 }
 
 // <div>

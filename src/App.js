@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Register from './pages/Register';
@@ -31,8 +31,8 @@ class App extends Component {
             {(this.auth.loggedIn())
   					// if logged in
   					? <Switch>
-              <Route exact path="/apartments" component={Apartments} />
               <Route exact path="/apartments/new" component={CreateApartment} />
+              <Route exact path="/apartments" component={Apartments} />
               <Route path="/apartments/:id" component={Apartment} />
               <Redirect path="/users/new" to="/apartments" />
               <Redirect path="/login" to="/apartments" />

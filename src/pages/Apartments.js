@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { getApartments } from '../api'
+import { getApartments } from '../api';
+import "./Apartments.css";
+
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class Apartments extends Component {
   constructor(props){
@@ -23,22 +26,10 @@ class Apartments extends Component {
     return (
       this.state.apartments.map(el => {
         return (
-          <div>
-          {el.street1}
-          <br/>
-          {el.street2}
-          <br/>
-          {el.city}, {el.state}, {el.postal_code}
-          <br/>
-          <br/>
-          {el.building_manager}
-          {el.manager_phone}
-          {el.manager_hours}
-          <br/>
-          <br/>
-          <br/>
-
-          </div>
+          <ListGroup className="indexListing">
+            <ListGroupItem className="list-group" header={`${el.street1}, ${el.street2}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
+            </ListGroupItem>
+          </ListGroup>
         )
       })
     );

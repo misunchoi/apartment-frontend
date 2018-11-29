@@ -36,6 +36,16 @@ export default class AuthService {
 		})
 	}
 
+	createApt = (apt) => {
+		return this.authFetch(`${this.domain}/apartments`, {
+			method: "POST",
+			body: JSON.stringify(apt),
+		})
+		.then(statusResponse => {
+			return statusResponse.json()
+		})
+	}
+
 	loggedIn() {
 		const token = this.getToken()
 		// check that token is not blank and is not expired
@@ -74,7 +84,8 @@ export default class AuthService {
 	}
 
 	getUserId = () => {
-		const token = decode(this.getToken());
+		const token = decode(this.getToken(), { header: true });
+		console.log(token);
 		return token.sub
 	}
 

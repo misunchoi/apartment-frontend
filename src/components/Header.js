@@ -27,7 +27,9 @@ class Header extends Component {
                 <NavItem eventKey={2} href="/apartments/new">
                   Create Apartment
                 </NavItem>
-
+                <NavItem eventKey={2} href="/users/:id/apartments">
+                  My Apartments
+                </NavItem>
               </Nav>
               <Nav pullRight>
                 <NavItem onClick={this.logout} eventKey={2} href="/">

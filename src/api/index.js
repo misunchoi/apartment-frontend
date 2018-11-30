@@ -16,7 +16,17 @@ let getApartment = function(id) {
     })
 }
 
+let getUserApartments = function(user_id) {
+  return fetch(BASE + `/users/${user_id}/apartments`)
+    .then((resp) => {
+        let json = resp.json()
+        return json
+      })
+    
+}
+
 export {
   getApartments,
-  getApartment
+  getApartment,
+  getUserApartments
 }

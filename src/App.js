@@ -9,6 +9,7 @@ import Apartments from './pages/Apartments';
 import Apartment from './pages/Apartment';
 import Login from './pages/Login';
 import CreateApartment from './pages/CreateApartment';
+import UsersApartments from './pages/UsersApartments';
 
 import AuthService from './services'
 
@@ -33,7 +34,8 @@ class App extends Component {
   					? <Switch>
               <Route exact path="/apartments/new" component={CreateApartment} />
               <Route exact path="/apartments" component={Apartments} />
-              <Route path="/apartments/:id" component={Apartment} />
+              <Route exact path="/apartments/:id" component={Apartment} />
+              <Route exact path="/users/:id/apartments" component={UsersApartments} />
               <Redirect path="/users/new" to="/apartments" />
               <Redirect path="/login" to="/apartments" />
 

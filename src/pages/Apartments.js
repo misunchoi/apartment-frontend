@@ -40,10 +40,6 @@ class Apartments extends Component {
             </ListGroup>
           )
         }
-
-
-
-
       })
     );
   }

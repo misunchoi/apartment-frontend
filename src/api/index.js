@@ -22,11 +22,45 @@ let getUserApartments = function(user_id) {
         let json = resp.json()
         return json
       })
-    
+
+}
+
+let destroyApartment = function(id) {
+  console.log(id);
+  return fetch(BASE + `/apartments/${id}`, {
+    body: JSON.stringify(id),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "DELETE"
+  })
+    .then((resp) => {
+      let json = resp
+      console.log(json);
+      return json
+    })
+}
+
+let editApartment = function(aptObj) {
+  console.log(aptObj.id);
+  return fetch(BASE + `/apartments/${aptObj.id}`, {
+    method: "PATCH",
+    body: JSON.stringify(aptObj),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(resp => {
+    let json = resp
+    console.log(json.errors);
+    return json
+  })
 }
 
 export {
   getApartments,
   getApartment,
-  getUserApartments
+  getUserApartments,
+  destroyApartment,
+  editApartment
 }

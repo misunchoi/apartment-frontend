@@ -10,6 +10,7 @@ import Apartment from './pages/Apartment';
 import Login from './pages/Login';
 import CreateApartment from './pages/CreateApartment';
 import UsersApartments from './pages/UsersApartments';
+import EditApartment from './pages/EditApartment';
 
 import AuthService from './services'
 
@@ -35,7 +36,15 @@ class App extends Component {
               <Route exact path="/apartments/new" component={CreateApartment} />
               <Route exact path="/apartments" component={Apartments} />
               <Route exact path="/apartments/:id" component={Apartment} />
-              <Route exact path="/users/:id/apartments" component={UsersApartments} />
+              <Route exact path="/users/:id/apartments" render={(routeProps) => (
+                <UsersApartments refresh={this.refresh} {...routeProps} />
+              )} />
+              <Route exact path="/apartments/:id/edit" render={(routeProps) => (
+                <EditApartment refresh={this.refresh} {...routeProps} />
+              )} />
+
+
+
               <Redirect path="/users/new" to="/apartments" />
               <Redirect path="/login" to="/apartments" />
 
@@ -46,7 +55,8 @@ class App extends Component {
               <Route exact path="/apartments" component={Apartments} />
               <Redirect exact path="/apartments/new" to="/login" />
               <Route exact path="/login" render={(routeProps) => (
-                <Login refresh={this.refresh} {...routeProps} />         )} />
+                <Login refresh={this.refresh} {...routeProps} />
+              )} />
               <Route path="/apartments/:id" component={Apartment} />
               <Route path="/users/new" render={(routeProps) => (
                 <Register refresh={this.refresh} {...routeProps} />

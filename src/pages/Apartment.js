@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getApartment } from '../api'
-
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
 class Apartment extends Component {
@@ -26,19 +26,10 @@ class Apartment extends Component {
     let { apartment } = this.state
       if (this.state.apartment != undefined) {
         return (
-          <div>
-            {apartment.street1}
-            <br/>
-            {apartment.street2}
-            <br/>
-            {apartment.city}, {apartment.state}, {apartment.postal_code}
-            <br/>
-            <br/>
-            {apartment.building_manager}: {apartment.manager_phone}, office hours: {apartment.manager_hours}
-            <br/>
-            <br/>
-            <br/>
-          </div>
+          <ListGroup className="indexListing">
+          <ListGroupItem className="list-group" header={`${apartment.street1} ${apartment.street2}, ${apartment.city}, ${apartment.postal_code}`} > {apartment.building_manager}, phone: {apartment.manager_phone}, {apartment.manager_hours}
+          </ListGroupItem>
+          </ListGroup>
         )
       } else {
         return (

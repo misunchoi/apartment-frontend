@@ -54,9 +54,6 @@ class Header extends Component {
                 <NavItem eventKey={1} href="/apartments">
                   All Apartments
                 </NavItem>
-                <NavItem eventKey={2} href="#">
-                  ??TBD
-                </NavItem>
 
               </Nav>
               <Nav pullRight>

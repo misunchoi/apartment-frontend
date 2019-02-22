@@ -33,7 +33,7 @@ class UsersApartments extends Component {
           return (
             <ListGroup className="indexListing">
             <ListGroupItem className="list-group" header={`${el.street1}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            <a href="#" class="btn btn-primary">Delete Apartment</a>
+            <a href="" class="btn btn-primary">Delete Apartment</a>
             </ListGroupItem>
             </ListGroup>
           )

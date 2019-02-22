@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:3000'
+const BASE = 'https://apartment-app-backend.herokuapp.com'
 
 let getApartments = function() {
   return fetch(BASE + '/apartments')

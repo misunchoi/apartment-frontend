@@ -2,7 +2,7 @@ import decode from 'jwt-decode'
 
 export default class AuthService {
 	constructor(domain) {
-		this.domain = 'http://localhost:3000'
+		this.domain = 'https://apartment-app-backend.herokuapp.com'
 	}
 
 	login = (credentials) => {
@@ -32,16 +32,6 @@ export default class AuthService {
 			console.log(token);
 			this.setToken(token)
 			//return json from response
-			return statusResponse.json()
-		})
-	}
-
-	createApt = (apt) => {
-		return this.authFetch(`${this.domain}/apartments`, {
-			method: "POST",
-			body: JSON.stringify(apt),
-		})
-		.then(statusResponse => {
 			return statusResponse.json()
 		})
 	}
@@ -120,5 +110,15 @@ export default class AuthService {
 		}
 		// we just return the whole response either way...
 		return response
+	}
+
+	createApt = (apt) => {
+		return this.authFetch(`${this.domain}/apartments`, {
+			method: "POST",
+			body: JSON.stringify(apt),
+		})
+		.then(statusResponse => {
+			return statusResponse.json()
+		})
 	}
 }

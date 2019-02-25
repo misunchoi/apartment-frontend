@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { getUserApartments } from '../api';
-import "./Apartments.css";
 import AuthService from '../services'
 
+const cardContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'center'
+}
 
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+const card = {
+  minWidth: "20rem",
+  margin: '20px'
+}
 
 class UsersApartments extends Component {
   constructor(props) {
     super(props)
     this.auth = new AuthService()
     this.state = {
-      deleteSuccess: false,
       apartment: []
     }
   }
@@ -29,16 +36,27 @@ class UsersApartments extends Component {
   render() {
     console.log(this.state.apartment)
     return (
-      this.state.apartment.map(el => {
-        return (
-            <ListGroup key={el.id} className="indexListing">
-            <ListGroupItem className="list-group" header={`${el.street1} ${el.street2}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            <br />
-            <a href={`/apartments/${el.id}/edit`} class="btn btn-primary destroyBotton">Edit Apartment</a>
-            </ListGroupItem>
-            </ListGroup>
-        )
-      })
+      <div style={cardContainer}>
+        {
+          this.state.apartment.map(el => {
+            return (
+              <div style={card} key={el.id} className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Apartment No.{el.id}</h4>
+                  <p className="card-text">
+                    {el.street1} {el.street2} <br/>
+                    {el.city}, {el.state} {el.postal_code} <br/><br/>
+                    Manager: {el.building_manager} <br/>
+                    Phone: {el.manager_phone} <br/>
+                    Hours: {el.manager_hours}
+                  </p>
+                  <a href={`/apartments/${el.id}/edit`} className="btn btn-primary">Edit</a>
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
     )
   }
  

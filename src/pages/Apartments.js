@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getApartments } from '../api';
-import "./Apartments.css";
 
 const cards = {
   display: 'flex',
@@ -33,15 +32,19 @@ class Apartments extends Component {
       <div style={cards}>
         {this.state.apartments.map(el => {
           return (
-              <div class="card border-primary mb-3" style={{maxWidth: "20rem", margin: '20px'}}>
-                <div class="card-header">Now Available</div>
-                <div class="card-body">
-                  <h4 class="card-title">{`${el.street1}, ${el.city}, ${el.postal_code}`}</h4>
-                  <p class="card-text">{el.building_manager}, phone: {el.manager_phone} <br/>
-                    <a href={`/apartments/${el.id}`} >Details</a>
-                  </p>
-                </div>
+            <div key={el.id} class="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>
+              <div class="card-header">Apartment No.{el.id}</div>
+              <div class="card-body">
+                <h4 class="card-title">
+                  {el.city}, {el.state}
+                </h4>
+                <p class="card-text">
+                  Manager: {el.building_manager} <br/>
+                  Phone: {el.manager_phone} <br/><br/>
+                  <a className="btn btn-primary" href={`/apartments/${el.id}`}>Details</a>
+                </p>
               </div>
+            </div>
           )
         })}
       </div>

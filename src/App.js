@@ -4,6 +4,7 @@ import './App.css';
 import { Redirect, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Register from './pages/Register';
 import Apartments from './pages/Apartments';
 import Apartment from './pages/Apartment';
@@ -29,7 +30,7 @@ class App extends Component {
       <div className="site">
         <Header logout={this.authStatusUpdate} auth={this.auth} authenticated={this.authenticated}/>
         <Router>
-          <div>
+          <div className="site-content">
             {(this.auth.loggedIn())
   					// if logged in
   					? <Switch>
@@ -65,6 +66,7 @@ class App extends Component {
   					</Switch>}
           </div>
         </Router>
+        <Footer className="footer"/>
       </div>
     );
   }

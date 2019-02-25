@@ -24,7 +24,7 @@ class Apartment extends Component {
   render() {
     console.log(this.state.apartment)
     let { apartment } = this.state
-      if (this.state.apartment != undefined) {
+      if (this.state.apartment !== undefined) {
         return (
           <ListGroup className="indexListing">
           <ListGroupItem className="list-group" header={`${apartment.street1} ${apartment.street2}, ${apartment.city}, ${apartment.postal_code}`} > {apartment.building_manager}, phone: {apartment.manager_phone}, {apartment.manager_hours}

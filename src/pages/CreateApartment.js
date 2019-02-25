@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import AuthService from '../services'
+import { createApartment } from '../api';
 
 class CreateApartment extends Component {
   constructor(props){
@@ -29,7 +30,6 @@ class CreateApartment extends Component {
 
   render () {
     let {
-      user_id,
       street1,
       street2,
       city,
@@ -40,11 +40,6 @@ class CreateApartment extends Component {
       manager_phone,
       manager_hours
     } = this.state.form.apartment
-
-    // if (this.state.successApt == true) {
-    //   console.log("made to above redirect");
-    //   return <Redirect exact to='/login' />
-    // }
 
     return(
       <div>
@@ -136,7 +131,7 @@ class CreateApartment extends Component {
             </Col>
           </FormGroup>
         </Form>
-      {this.state.successApt && <Redirect to="/apartments" />}
+      {this.state.successApt && <Redirect to={`/users/${this.state.form.apartment.user_id}/apartments`} />}
       </div>
     )
   }
@@ -152,7 +147,7 @@ class CreateApartment extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.auth.createApt(this.state.form)
+    createApartment(this.state.form)
     .then(json => {
       console.log("got to second then:", json)
       if(json.errors) {

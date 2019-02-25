@@ -7,11 +7,9 @@ import { editApartment, getApartment } from '../api';
 class EditApartment extends Component {
   constructor(props){
     super(props)
-    // let user = this.auth.getUserId()
     this.state = {
       editSuccess: false,
       apartment: undefined
-
     }
   }
 
@@ -36,12 +34,11 @@ class EditApartment extends Component {
       building_manager,
       manager_phone,
       manager_hours,
-      user_id
     } = this.state
 
     console.log(this.state);
 
-  if (this.state.apartment != undefined) {
+  if (this.state.apartment !== undefined) {
     return(
       <div>
         <Form horizontal onSubmit={this.onSubmit}>
@@ -132,7 +129,7 @@ class EditApartment extends Component {
             </Col>
           </FormGroup>
         </Form>
-      // {this.state.editSuccess && <Redirect to={`/users/${this.state.apartment.user_id}/apartments`}/>}
+      {this.state.editSuccess && <Redirect to={`/users/${this.state.apartment.user_id}/apartments`}/>}
       </div>
     )
   } else {

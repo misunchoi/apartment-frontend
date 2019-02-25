@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
-import { BrowserRouter as Redirect } from 'react-router-dom';
 import AuthService from '../services'
 
 class Register extends Component {

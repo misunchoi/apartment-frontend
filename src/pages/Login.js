@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
-import { BrowserRouter as Redirect } from 'react-router-dom';
 import AuthService from '../services'
 
 class Login extends Component {
@@ -21,8 +20,6 @@ class Login extends Component {
 
   render () {
     let {
-      firstName,
-      lastName,
       email,
       password
     } = this.state.form.user

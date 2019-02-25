@@ -112,13 +112,13 @@ export default class AuthService {
 		return response
 	}
 
-	createApt = (apt) => {
-		return this.authFetch(`${this.domain}/apartments`, {
-			method: "POST",
-			body: JSON.stringify(apt),
-		})
-		.then(statusResponse => {
-			return statusResponse.json()
-		})
-	}
+	// createApt = (apt) => {
+	// 	return this.authFetch(`${this.domain}/apartments`, {
+	// 		method: "POST",
+	// 		body: JSON.stringify(apt),
+	// 	})
+	// 	.then(statusResponse => {
+	// 		return statusResponse.json()
+	// 	})
+	// }
 }

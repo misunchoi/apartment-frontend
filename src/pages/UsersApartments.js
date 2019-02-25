@@ -27,31 +27,22 @@ class UsersApartments extends Component {
   }
 
   render() {
+    console.log(this.state.apartment)
     return (
       this.state.apartment.map(el => {
-        if (el.street2 == null) {
-          return (
-            <ListGroup className="indexListing">
-            <ListGroupItem className="list-group" header={`${el.street1}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            <a href="" class="btn btn-primary">Delete Apartment</a>
-            </ListGroupItem>
-            </ListGroup>
-          )
-        } else {
-          return (
-            <ListGroup className="indexListing">
+        return (
+            <ListGroup key={el.id} className="indexListing">
             <ListGroupItem className="list-group" header={`${el.street1} ${el.street2}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
             <br />
-            <a onClick={() => this.destroyApt(el.id)} href="" class="btn btn-primary destroyBotton">Delete Apartment</a>
+            <a onClick={() => this.destroyApt(el.id)} href="" class="btn btn-primary destroyButton">Delete Apartment</a>
             <a href={`/apartments/${el.id}/edit`} class="btn btn-primary destroyBotton">Edit Apartment</a>
             </ListGroupItem>
             </ListGroup>
-          )
-        }
+        )
       })
-    );
+    )
   }
-
+ 
 destroyApt = (id) => {
   console.log(id);
   destroyApartment(id)

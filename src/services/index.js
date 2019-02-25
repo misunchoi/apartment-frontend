@@ -111,14 +111,4 @@ export default class AuthService {
 		// we just return the whole response either way...
 		return response
 	}
-
-	// createApt = (apt) => {
-	// 	return this.authFetch(`${this.domain}/apartments`, {
-	// 		method: "POST",
-	// 		body: JSON.stringify(apt),
-	// 	})
-	// 	.then(statusResponse => {
-	// 		return statusResponse.json()
-	// 	})
-	// }
 }

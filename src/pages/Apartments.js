@@ -32,13 +32,13 @@ class Apartments extends Component {
       <div style={cards}>
         {this.state.apartments.map(el => {
           return (
-            <div key={el.id} class="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>
-              <div class="card-header">Apartment No.{el.id}</div>
-              <div class="card-body">
-                <h4 class="card-title">
+            <div key={el.id} className="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>
+              <div className="card-header">Apartment No.{el.id}</div>
+              <div className="card-body">
+                <h4 className="card-title">
                   {el.city}, {el.state}
                 </h4>
-                <p class="card-text">
+                <p className="card-text">
                   Manager: {el.building_manager} <br/>
                   Phone: {el.manager_phone} <br/><br/>
                   <a className="btn btn-primary" href={`/apartments/${el.id}`}>Details</a>

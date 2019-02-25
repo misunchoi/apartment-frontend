@@ -3,9 +3,6 @@ import { Redirect } from 'react-router-dom';
 import AuthService from '../services'
 import { createApartment } from '../api';
 
-const form = {
-  marginTop: "30px"
-}
 
 const group = {
   display: "flex",
@@ -61,7 +58,8 @@ class CreateApartment extends Component {
     } = this.state.form.apartment
 
     return(
-      <div style={form}>
+      <div>
+        <h3>Create Apartment</h3><br/>
         <form onSubmit={this.onSubmit}>
           <fieldset>
 

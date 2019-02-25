@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { editApartment, getApartment,  destroyApartment } from '../api';
 
-const form = {
-  marginTop: "30px"
-}
 
 const group = {
   display: "flex",
@@ -83,7 +79,8 @@ class EditApartment extends Component {
 
   if (this.state.apartment !== undefined) {
     return(
-      <div style={form}>
+      <div>
+        <h3>Edit Apartment</h3><br/>
         <form onSubmit={this.onSubmit}>
         <fieldset>
           <div style={group} className="form-group" >

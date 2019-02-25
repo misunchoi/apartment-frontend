@@ -20,8 +20,8 @@ class Apartment extends Component {
   }
 
   render() {
-    console.log(this.state.apartment)
     let { apartment } = this.state
+    
       if (this.state.apartment !== undefined) {
         return (
             <div class="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>

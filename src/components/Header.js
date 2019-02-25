@@ -26,7 +26,7 @@ class Header extends Component {
     // navbar if logged IN//
       if (this.props.auth.loggedIn()) {
         return(
-          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+          <nav style={{marginBottom: '20px'}} className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="/">Apartment App</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation" onClick={this.handleToggle}>
               <span className="navbar-toggler-icon"></span>
@@ -55,7 +55,7 @@ class Header extends Component {
       // navbar if NOT logged in//
       } else {
         return(
-          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+          <nav style={{marginBottom: '20px'}} className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="/">Apartment Hunters</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation" onClick={this.handleToggle}>
               <span className="navbar-toggler-icon"></span>

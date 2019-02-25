@@ -41,7 +41,4 @@ class Apartment extends Component {
     }
 }
 
-// <div>
-//   {this.state.apartment.street1}
-// </div>
 export default Apartment;

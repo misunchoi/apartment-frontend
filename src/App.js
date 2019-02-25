@@ -26,7 +26,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="site">
         <Header logout={this.authStatusUpdate} auth={this.auth} authenticated={this.authenticated}/>
         <Router>
           <div>

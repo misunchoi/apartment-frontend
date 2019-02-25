@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import { editApartment, getApartment } from '../api';
+import { editApartment, getApartment,  destroyApartment } from '../api';
 
 
 class EditApartment extends Component {
@@ -127,6 +127,9 @@ class EditApartment extends Component {
             <Col smOffset={2} sm={10}>
               <Button type="submit">Edit Apartment</Button>
             </Col>
+            <Col smOffset={2} sm={10}>
+              <Button onClick={this.deleteApt}>Delete</Button>
+            </Col>
           </FormGroup>
         </Form>
       {this.state.editSuccess && <Redirect to={`/users/${this.state.apartment.user_id}/apartments`}/>}
@@ -157,6 +160,20 @@ class EditApartment extends Component {
     .then(resp => {
       console.log("Edited");
       this.setState({editSuccess: true})
+    })
+  }
+
+  deleteApt = (e) => {
+    console.log("got to onSubmit");
+    editApartment(this.state.apartment)
+    .then(resp => {
+      console.log("Edited");
+      destroyApartment(this.props.match.params.id)
+      .then(resp => {
+        console.log("Deleted");
+        this.setState({editSuccess: true});
+        this.props.refresh()
+      })
     })
   }
 

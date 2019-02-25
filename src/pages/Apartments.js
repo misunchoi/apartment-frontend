@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { getApartments } from '../api';
 import "./Apartments.css";
 
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+const cards = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'center'
+}
+
 
 class Apartments extends Component {
   constructor(props){
@@ -24,23 +30,21 @@ class Apartments extends Component {
   render() {
     console.log(this.state.apartments);
     return (
-      this.state.apartments.map(el => {
-        if (el.street2 == null) {
+      <div style={cards}>
+        {this.state.apartments.map(el => {
           return (
-            <ListGroup className="indexListing">
-            <ListGroupItem className="list-group" header={`${el.street1}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            </ListGroupItem>
-            </ListGroup>
+              <div class="card border-primary mb-3" style={{maxWidth: "20rem", margin: '20px'}}>
+                <div class="card-header">Now Available</div>
+                <div class="card-body">
+                  <h4 class="card-title">{`${el.street1}, ${el.city}, ${el.postal_code}`}</h4>
+                  <p class="card-text">{el.building_manager}, phone: {el.manager_phone} <br/>
+                    <a href={`/apartments/${el.id}`} >Details</a>
+                  </p>
+                </div>
+              </div>
           )
-        } else {
-          return (
-            <ListGroup className="indexListing">
-            <ListGroupItem className="list-group" header={`${el.street1} ${el.street2}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            </ListGroupItem>
-            </ListGroup>
-          )
-        }
-      })
+        })}
+      </div>
     );
   }
 }

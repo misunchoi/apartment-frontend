@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getApartment } from '../api'
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
 class Apartment extends Component {
@@ -26,15 +25,18 @@ class Apartment extends Component {
     let { apartment } = this.state
       if (this.state.apartment !== undefined) {
         return (
-          <ListGroup className="indexListing">
-          <ListGroupItem className="list-group" header={`${apartment.street1} ${apartment.street2}, ${apartment.city}, ${apartment.postal_code}`} > {apartment.building_manager}, phone: {apartment.manager_phone}, {apartment.manager_hours}
-          </ListGroupItem>
-          </ListGroup>
+          <div class="card border-primary mb-3" style={{maxWidth: "20rem"}}>
+            <div class="card-header">Now Available</div>
+            <div class="card-body">
+              <h4 class="card-title">{`${apartment.street1} ${apartment.street2}, ${apartment.city}, ${apartment.postal_code}`}</h4>
+              <p class="card-text">{apartment.building_manager}, phone: {apartment.manager_phone}, {apartment.manager_hours}</p>
+            </div>
+          </div>
         )
       } else {
         return (
           <div>
-            page loading
+            Loading...
           </div>
         )
       }

@@ -15,11 +15,11 @@ const group = {
 
 const input = {
   width: "300px",
-  marginBottom: "10px"
 }
 
 const label = {
-  textAlign: 'left'
+  textAlign: 'left',
+  marginTop: "10px"
 }
 
 
@@ -29,6 +29,8 @@ class Login extends Component {
     this.auth = new AuthService()
     this.state = {
       loginSuccess: false,
+      passwordValidation: "form-control",
+      emailValidation: "form-control",
       errors: "",
       form: {
         user: {
@@ -36,6 +38,31 @@ class Login extends Component {
           password: ""
         }
       }
+    }
+  }
+
+  handleValidation = (e) => {
+    e.preventDefault()
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(this.state.form.user.email) && this.state.form.user.password.length < 6) {
+      this.setState({
+        emailValidation: "form-control is-invalid",
+        passwordValidation: "form-control is-invalid"
+      })
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(this.state.form.user.email)) {
+      this.setState({
+        emailValidation: "form-control is-invalid",
+        passwordValidation: "form-control",
+      })
+    } else if (this.state.form.user.password.length < 6) {
+      this.setState({
+        emailValidation: "form-control",
+        passwordValidation: "form-control is-invalid",
+      })
+    } else {
+      this.setState({
+        emailValidation: "form-control",
+        passwordValidation: "form-control",
+      })
     }
   }
 
@@ -48,15 +75,27 @@ class Login extends Component {
       <div style={form}>
         <h4>Login</h4>
         <form onSubmit={this.onSubmit}>
-          <div style={group} className="form-group" >
+          {/* <div style={group} className="form-group" >
             <label style={label}>Email</label>
-            <input style={input} className="form-control" onChange={this.onChange} name="email" value={email} type="email"/>
+            <input style={input} className={this.state.emailValidation} onChange={this.onChange} name="email" value={email} type="email"/>
+          </div> */}
+
+          <div style={group} class="form-group">
+            <label style={label}>Email</label>
+            <input style={input} className={this.state.emailValidation} onChange={this.onChange} name="email" value={email} type="email"/>
+            <div class="invalid-feedback">Please enter a valid email address</div>
           </div>
 
-          <div style={group} className="form-group" >
+          <div style={group} class="form-group">
+            <label style={label}>Password</label>
+            <input style={input} className={this.state.passwordValidation} onChange={this.onChange} name="password" value={password} type="password"/>
+            <div class="invalid-feedback">Password needs to be at least 6 characters long</div>
+          </div>
+
+          {/* <div style={group} className="form-group" >
             <label style={label}>Password</label>
             <input style={input} className="form-control" onChange={this.onChange} name="password" value={password} type="password"/>
-          </div>
+          </div> */}
 
           <button style={{margin: '20px'}} type="submit" className="btn btn-primary">Login</button>
           <p>Don't have an account? Register <a href="/users/new">here</a></p>
@@ -72,15 +111,17 @@ class Login extends Component {
     this.setState ({
       form
     })
+    
+    this.handleValidation(e)
   }
 
   onSubmit = (e) => {
     e.preventDefault()
     this.auth.login(this.state.form)
     .then(json => {
-      // console.log("got to second then:", json)
+      console.log("got to second then:", json)
       if(json.errors) {
-        // console.log("!! ERRORS !!", json.errors);
+        console.log("!! ERRORS !!", json.errors);
         this.setState({
           errors: json.errors
         })

@@ -111,12 +111,13 @@ class Login extends Component {
     this.setState ({
       form
     })
-    
+
     this.handleValidation(e)
   }
 
   onSubmit = (e) => {
     e.preventDefault()
+    this.handleValidation(e)
     this.auth.login(this.state.form)
     .then(json => {
       console.log("got to second then:", json)

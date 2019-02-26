@@ -48,7 +48,7 @@ class App extends Component {
               )} />
 
               <Redirect path="/users/new" to="/apartments" />
-              <Redirect path="/login" to="/users/:id/apartments" />
+              <Redirect path="/login" to="/apartments" />
 
 
   					</Switch>

@@ -100,7 +100,6 @@ class Login extends Component {
           <button style={{margin: '20px'}} type="submit" className="btn btn-primary">Login</button>
           <p>Don't have an account? Register <a href="/users/new">here</a></p>
         </form>
-        {this.state.loginSuccess && <Redirect to="/"/>}
       </div>
     )
   }
@@ -127,9 +126,7 @@ class Login extends Component {
           errors: json.errors
         })
       } else {
-        this.setState({
-          loginSuccess: true
-        })
+        this.props.refresh()
       }
     })
   }

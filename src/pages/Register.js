@@ -83,32 +83,41 @@ class Register extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.setState({
-      errorMessage: "Please wait...",
-      messageColor: "blue"
-    })
-    this.auth.register(this.state.form)
-    .then(json => {
-      console.log("got to second then:", json.errors)
-      if (this.state.emailValidation === "form-control is-invalid" || this.state.passwordValidation === "form-control is-invalid") {
-        this.setState({
-          errors: json.errors,
-          errorMessage: "Please input a valid email or password.",
-          messageColor: "red"
-        })
-        console.log("!! ERRORS !!", json.errors);
-      } else if (json.errors === undefined) {
-        this.props.refresh()
-      } else if (json.errors.email) {
-        this.setState({
-          errors: json.errors,
-          errorMessage: "The email is already registered.",
-          messageColor: "red"
-        })
-      } else {
-        this.props.refresh()
-      }
-    })
+    if (this.state.form.user.email === "" || this.state.form.user.password === "") {
+      this.setState({
+        errorMessage: "Email and/or password cannot be blank.",
+        messageColor: "red"
+      })
+    } else {
+      this.setState({
+        errorMessage: "Please wait...",
+        messageColor: "blue"
+      })
+
+      this.auth.register(this.state.form)
+      .then(json => {
+        console.log("got to second then:", json.errors)
+        if (this.state.emailValidation === "form-control is-invalid" || this.state.passwordValidation === "form-control is-invalid") {
+          this.setState({
+            errors: json.errors,
+            errorMessage: "Please enter a valid email or password.",
+            messageColor: "red"
+          })
+          console.log("!! ERRORS !!", json.errors);
+        } else if (json.errors === undefined) {
+          this.props.refresh()
+        } else if (json.errors.email) {
+          this.setState({
+            errors: json.errors,
+            errorMessage: "The email is already registered.",
+            messageColor: "red"
+          })
+        } else {
+          this.props.refresh()
+        }
+      })
+    }
+
   }
 
   handleValidation = (e) => {

@@ -26,6 +26,10 @@ class Register extends Component {
     this.auth = new AuthService()
     this.state = {
       registerSuccess: false,
+      passwordValidation: "form-control",
+      emailValidation: "form-control",
+      errorMessage: "",
+      messageColor: "",
       errors: "",
       form: {
         user: {
@@ -46,17 +50,23 @@ class Register extends Component {
       <div style={form}>
         <h4>New Account</h4>
         <form onSubmit={this.onSubmit}>
-          <div style={group} className="form-group" >
+
+          <div style={group} class="form-group">
             <label style={label}>Email</label>
-            <input style={input} className="form-control" onChange={this.onChange} name="email" value={email} type="email"/>
+            <input style={input} className={this.state.emailValidation} onChange={this.onChange} name="email" value={email} type="email"/>
+            <div class="invalid-feedback">Please enter a valid email address</div>
           </div>
 
-          <div style={group} className="form-group" >
+          <div style={group} class="form-group">
             <label style={label}>Password</label>
-            <input style={input} className="form-control" onChange={this.onChange} name="password" value={password} type="password"/>
+            <input style={input} className={this.state.passwordValidation} onChange={this.onChange} name="password" value={password} type="password"/>
+            <div class="invalid-feedback">Password needs to be at least 6 characters long</div>
           </div>
 
-          <button style={{marginTop: '20px'}} type="submit" className="btn btn-primary">Register</button>
+          <p style={{color: this.state.messageColor}}>{this.state.errorMessage}</p>
+
+          <button style={{margin: '20px'}} type="submit" className="btn btn-primary">Register</button>
+          <p>Already registered? Login <a href="/login">here</a></p>
         </form>
       </div>
     )
@@ -68,22 +78,62 @@ class Register extends Component {
     this.setState ({
       form
     })
+    this.handleValidation(e)
   }
 
   onSubmit = (e) => {
     e.preventDefault()
+    this.setState({
+      errorMessage: "Please wait...",
+      messageColor: "blue"
+    })
     this.auth.register(this.state.form)
     .then(json => {
-      // console.log("got to second then:", json)
-      if(json.errors) {
-        // console.log("!! ERRORS !!", json.errors);
+      console.log("got to second then:", json.errors)
+      if (this.state.emailValidation === "form-control is-invalid" || this.state.passwordValidation === "form-control is-invalid") {
         this.setState({
-          errors: json.errors
+          errors: json.errors,
+          errorMessage: "Please input a valid email or password.",
+          messageColor: "red"
+        })
+        console.log("!! ERRORS !!", json.errors);
+      } else if (json.errors === undefined) {
+        this.props.refresh()
+      } else if (json.errors.email) {
+        this.setState({
+          errors: json.errors,
+          errorMessage: "The email is already registered.",
+          messageColor: "red"
         })
       } else {
         this.props.refresh()
       }
     })
+  }
+
+  handleValidation = (e) => {
+    e.preventDefault()
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(this.state.form.user.email) && this.state.form.user.password.length < 6) {
+      this.setState({
+        emailValidation: "form-control is-invalid",
+        passwordValidation: "form-control is-invalid"
+      })
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(this.state.form.user.email)) {
+      this.setState({
+        emailValidation: "form-control is-invalid",
+        passwordValidation: "form-control",
+      })
+    } else if (this.state.form.user.password.length < 6) {
+      this.setState({
+        emailValidation: "form-control",
+        passwordValidation: "form-control is-invalid",
+      })
+    } else {
+      this.setState({
+        emailValidation: "form-control",
+        passwordValidation: "form-control",
+      })
+    }
   }
 
 }

@@ -30,6 +30,7 @@ class Apartments extends Component {
     console.log(this.state.apartments);
     return (
       <div style={cards}>
+        <h3>All Apartments</h3><br/>
         {this.state.apartments.map(el => {
           return (
             <div key={el.id} className="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>

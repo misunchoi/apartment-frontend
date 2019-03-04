@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { getApartment } from '../api'
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
-
 
 class Apartment extends Component {
   constructor(props) {
@@ -22,26 +20,33 @@ class Apartment extends Component {
   }
 
   render() {
-    console.log(this.state.apartment)
     let { apartment } = this.state
-      if (this.state.apartment != undefined) {
+    
+      if (this.state.apartment !== undefined) {
         return (
-          <ListGroup className="indexListing">
-          <ListGroupItem className="list-group" header={`${apartment.street1} ${apartment.street2}, ${apartment.city}, ${apartment.postal_code}`} > {apartment.building_manager}, phone: {apartment.manager_phone}, {apartment.manager_hours}
-          </ListGroupItem>
-          </ListGroup>
+            <div class="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>
+              <div class="card-header">Apartment No.{apartment.id}</div>
+              <div class="card-body">
+                <h4 class="card-title">
+                  {apartment.street1} {apartment.street2} <br/>
+                  {apartment.city}, {apartment.state} {apartment.postal_code}
+                </h4>
+                <p class="card-text">
+                  Manager: {apartment.building_manager} <br/>
+                  Phone: {apartment.manager_phone} <br/>
+                  Hours: {apartment.manager_hours}
+                </p>
+              </div>
+            </div>
         )
       } else {
         return (
           <div>
-            page loading
+            Loading...
           </div>
         )
       }
     }
 }
 
-// <div>
-//   {this.state.apartment.street1}
-// </div>
 export default Apartment;

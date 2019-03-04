@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
-import { getUserApartments, destroyApartment } from '../api';
-import "./Apartments.css";
+import { getUserApartments } from '../api';
 import AuthService from '../services'
 
+const cardContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'center'
+}
 
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+const card = {
+  minWidth: "20rem",
+  margin: '20px'
+}
 
 class UsersApartments extends Component {
   constructor(props) {
     super(props)
     this.auth = new AuthService()
     this.state = {
-      deleteSuccess: false,
       apartment: []
     }
   }
@@ -27,40 +34,46 @@ class UsersApartments extends Component {
   }
 
   render() {
-    return (
-      this.state.apartment.map(el => {
-        if (el.street2 == null) {
-          return (
-            <ListGroup className="indexListing">
-            <ListGroupItem className="list-group" header={`${el.street1}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            <a href="" class="btn btn-primary">Delete Apartment</a>
-            </ListGroupItem>
-            </ListGroup>
-          )
-        } else {
-          return (
-            <ListGroup className="indexListing">
-            <ListGroupItem className="list-group" header={`${el.street1} ${el.street2}, ${el.city}, ${el.postal_code}`} href={`/apartments/${el.id}`}> {el.building_manager}, phone: {el.manager_phone}
-            <br />
-            <a onClick={() => this.destroyApt(el.id)} href="" class="btn btn-primary destroyBotton">Delete Apartment</a>
-            <a href={`/apartments/${el.id}/edit`} class="btn btn-primary destroyBotton">Edit Apartment</a>
-            </ListGroupItem>
-            </ListGroup>
-          )
-        }
-      })
-    );
-  }
+    console.log(this.state.apartment)
+    
+    if (this.state.apartment.length === 0) {
+      return (
+        <div>
+          <h3>My Apartments</h3>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h3>My Apartments</h3>
+          <div style={cardContainer}>
+            {
+              this.state.apartment.map(el => {
+                return (
+                  <div style={card} key={el.id} className="card">
+                    <div className="card-body">
+                      <h4 className="card-title">Apartment No.{el.id}</h4>
+                      <p className="card-text">
+                        {el.street1} {el.street2} <br/>
+                        {el.city}, {el.state} {el.postal_code} <br/><br/>
+                        Manager: {el.building_manager} <br/>
+                        Phone: {el.manager_phone} <br/>
+                        Hours: {el.manager_hours}
+                      </p>
+                      <a href={`/apartments/${el.id}/edit`} className="btn btn-primary">Edit</a>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+      )
+    }
 
-destroyApt = (id) => {
-  console.log(id);
-  destroyApartment(id)
-  .then(resp => {
-    console.log("Deleted");
-    this.setState({deleteSuccess: true})
-    this.props.refresh()
-  })
-}
+
+  }
+ 
 
 
 }

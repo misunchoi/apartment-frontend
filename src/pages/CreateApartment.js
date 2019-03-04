@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import AuthService from '../services'
+import { createApartment } from '../api';
+
+
+const group = {
+  display: "flex",
+  flexDirection: 'column',
+  margin: 'auto'
+}
+
+const input = {
+  width: "300px",
+  marginBottom: "10px"
+}
+
+const label = {
+  textAlign: 'left'
+}
+
 
 class CreateApartment extends Component {
   constructor(props){
@@ -29,7 +46,6 @@ class CreateApartment extends Component {
 
   render () {
     let {
-      user_id,
       street1,
       street2,
       city,
@@ -41,102 +57,63 @@ class CreateApartment extends Component {
       manager_hours
     } = this.state.form.apartment
 
-    // if (this.state.successApt == true) {
-    //   console.log("made to above redirect");
-    //   return <Redirect exact to='/login' />
-    // }
-
     return(
       <div>
-        <Form horizontal onSubmit={this.onSubmit}>
-          <FormGroup controlId="formHorizontalStreet1">
-            <Col componentClass={ControlLabel} sm={2}>
-              Street 1
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="street1" value={street1} type="street1" placeholder="Street 1" />
-            </Col>
-          </FormGroup>
+        <h3>Create Apartment</h3><br/>
+        <form onSubmit={this.onSubmit}>
+          <fieldset>
 
-          <FormGroup controlId="formHorizontalStreet2">
-            <Col componentClass={ControlLabel} sm={2}>
-              Street 2
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="street2" value={street2} type="street2" placeholder="Street 2" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group" >
+            <label style={label}>Street 1</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="street1" value={street1} type="street1" placeholder="Please Enter Street Address" />
+          </div>
 
-          <FormGroup controlId="formHorizontalCity">
-            <Col componentClass={ControlLabel} sm={2}>
-              City
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="city" value={city} type="city" placeholder="City" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>Street 2</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="street2" value={street2} type="street2" placeholder="Apt, Unit, etc." />
+          </div>
 
-          <FormGroup controlId="formHorizontalPostalCode">
-            <Col componentClass={ControlLabel} sm={2}>
-              Postal Code
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="postal_code" value={postal_code} type="number" placeholder="Postal Code" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>City</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="city" value={city} type="city" placeholder="City" />
+          </div>
 
-          <FormGroup controlId="formHorizontalState">
-            <Col componentClass={ControlLabel} sm={2}>
-              State
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="state" value={state} type="state" placeholder="State" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>Zip Code</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="postal_code" value={postal_code} type="number" placeholder="Zip Code" />
+          </div>
 
-          <FormGroup controlId="formHorizontalCountry">
-            <Col componentClass={ControlLabel} sm={2}>
-              Country
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="country" value={country} type="country" placeholder="Country" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>State</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="state" value={state} type="state" placeholder="State" />
+          </div>
 
-          <FormGroup controlId="formHorizontalBuildingManager">
-            <Col componentClass={ControlLabel} sm={2}>
-              Building Manager
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="building_manager" value={building_manager} type="building_manager" placeholder="Building Manager" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>Country</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="country" value={country} type="country" placeholder="Country" />
+          </div>
 
-          <FormGroup controlId="formHorizontalManagerPhone">
-            <Col componentClass={ControlLabel} sm={2}>
-              Manager Phone
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="manager_phone" value={manager_phone} type="manager_phone" placeholder="Manager Phone" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>Building Manager</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="building_manager" value={building_manager} type="building_manager" placeholder="Please Enter Full Name" />
+          </div>
 
-          <FormGroup controlId="formHorizontalManagerHours">
-            <Col componentClass={ControlLabel} sm={2}>
-              Manager Hours
-            </Col>
-            <Col sm={10}>
-              <FormControl onChange={this.onChange} name="manager_hours" value={manager_hours} type="manager_hours" placeholder="Manager Hours" />
-            </Col>
-          </FormGroup>
+          <div style={group} className="form-group">
+            <label style={label}>Manager Phone</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="manager_phone" value={manager_phone} type="manager_phone" placeholder="###-###-####" />
+          </div>
 
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Button type="submit">Create Apartment</Button>
-            </Col>
-          </FormGroup>
-        </Form>
-      {this.state.successApt && <Redirect to="/apartments" />}
+          <div style={group} className="form-group">
+            <label style={label}>Manager Hours</label>
+            <input style={input} className="form-control" onChange={this.onChange} name="manager_hours" value={manager_hours} type="manager_hours" placeholder="example: 2 PM - 7 PM" />
+          </div>
+
+          
+          <button style={{marginTop: '20px'}} type="submit" className="btn btn-primary">Create</button>
+          </fieldset>
+        </form>
+
+      {this.state.successApt && <Redirect to={`/users/${this.state.form.apartment.user_id}/apartments`} />}
       </div>
     )
   }
@@ -152,7 +129,7 @@ class CreateApartment extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.auth.createApt(this.state.form)
+    createApartment(this.state.form)
     .then(json => {
       console.log("got to second then:", json)
       if(json.errors) {

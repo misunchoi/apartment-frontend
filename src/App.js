@@ -4,6 +4,8 @@ import './App.css';
 import { Redirect, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
 import Register from './pages/Register';
 import Apartments from './pages/Apartments';
 import Apartment from './pages/Apartment';
@@ -26,13 +28,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="site">
         <Header logout={this.authStatusUpdate} auth={this.auth} authenticated={this.authenticated}/>
+
         <Router>
-          <div>
+          <div className="site-content">
             {(this.auth.loggedIn())
   					// if logged in
   					? <Switch>
+              <Route exact path="/" component={Home} />
               <Route exact path="/apartments/new" component={CreateApartment} />
               <Route exact path="/apartments" component={Apartments} />
               <Route exact path="/apartments/:id" component={Apartment} />
@@ -43,8 +47,6 @@ class App extends Component {
                 <EditApartment refresh={this.refresh} {...routeProps} />
               )} />
 
-
-
               <Redirect path="/users/new" to="/apartments" />
               <Redirect path="/login" to="/apartments" />
 
@@ -52,6 +54,7 @@ class App extends Component {
   					</Switch>
   					// if not logged in (ie Guest User)
   					: <Switch>
+              <Route exact path="/" component={Home} />
               <Route exact path="/apartments" component={Apartments} />
               <Redirect exact path="/apartments/new" to="/login" />
               <Route exact path="/login" render={(routeProps) => (
@@ -65,6 +68,7 @@ class App extends Component {
   					</Switch>}
           </div>
         </Router>
+        <Footer className="footer"/>
       </div>
     );
   }

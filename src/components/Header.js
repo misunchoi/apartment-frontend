@@ -1,71 +1,78 @@
 import React, { Component } from 'react';
-import {Navbar, Brand, Nav, NavItem } from 'react-bootstrap';
 import AuthService from '../services'
 
 class Header extends Component {
   constructor(props){
     super(props)
       this.auth = new AuthService()
+      this.state = {
+        toggle: 'collapse navbar-collapse'
+      }
+  }
+
+  handleToggle = () => {
+    if (this.state.toggle === 'collapse navbar-collapse') {
+      this.setState({
+        toggle: 'collapse navbar-collapse show'
+      })
+    } else if (this.state.toggle === 'collapse navbar-collapse show') {
+      this.setState({
+        toggle: 'collapse navbar-collapse'
+      })
     }
+  }
 
   render () {
     // navbar if logged IN//
       if (this.props.auth.loggedIn()) {
         return(
-          <Navbar inverse collapseOnSelect>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">Apartment Hunters</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                <NavItem eventKey={1} href="/apartments">
-                  All Apartments
-                </NavItem>
-                <NavItem eventKey={2} href="/apartments/new">
-                  Create Apartment
-                </NavItem>
-                <NavItem eventKey={2} href="/users/:id/apartments">
-                  My Apartments
-                </NavItem>
-              </Nav>
-              <Nav pullRight>
-                <NavItem onClick={this.logout} eventKey={2} href="/">
-                  Logout
-                </NavItem>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          <nav style={{marginBottom: '20px'}} className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a className="navbar-brand" href="/">Apartment App</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation" onClick={this.handleToggle}>
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className={this.state.toggle} id="navbarColor01">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <a className="nav-link" href="/apartments"> All Apartments </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/apartments/new">Create Apartment</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/users/:id/apartments">My Apartments</a>
+                </li>
+              </ul>
+              <ul className="navbar-nav my-2 my-lg-0">
+                <li className="nav-item">
+                  <a className="nav-link" onClick={this.logout} href="/">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
         )
       // navbar if NOT logged in//
       } else {
         return(
-          <Navbar inverse collapseOnSelect>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">Apartment Hunters</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                <NavItem eventKey={1} href="/apartments">
-                  All Apartments
-                </NavItem>
+          <nav style={{marginBottom: '20px'}} className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a className="navbar-brand" href="/">Apartment Hunters</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation" onClick={this.handleToggle}>
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
-              </Nav>
-              <Nav pullRight>
-                <NavItem eventKey={1} href="/login">
-                  LogIn
-                </NavItem>
-                <NavItem eventKey={2} href="/users/new">
-                  Register
-                </NavItem>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+            <div className={this.state.toggle} id="navbarColor01">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <a className="nav-link" href="/apartments"> All Apartments </a>
+                </li>
+              </ul>
+              <ul className="navbar-nav my-2 my-lg-0">
+                <a className="nav-link mr-sm-2" href="/login">Login</a>
+                <a className="nav-link my-2 my-sm-0" href="/users/new">Register</a>
+              </ul>
+            </div>
+          </nav>
         )
       }
   }

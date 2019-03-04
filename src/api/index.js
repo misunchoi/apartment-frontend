@@ -22,7 +22,22 @@ let getUserApartments = function(user_id) {
         let json = resp.json()
         return json
       })
+}
 
+let createApartment = function(apt) {
+  console.log(apt)
+  return fetch( BASE + `/apartments`, {
+    body: JSON.stringify(apt),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+  })
+  .then((resp) => {
+    let json = resp
+    console.log(json);
+    return json
+  })
 }
 
 let destroyApartment = function(id) {
@@ -62,5 +77,6 @@ export {
   getApartment,
   getUserApartments,
   destroyApartment,
-  editApartment
+  editApartment,
+  createApartment,
 }

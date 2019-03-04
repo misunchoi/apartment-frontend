@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import AuthService from '../services'
 
@@ -61,10 +60,10 @@ class Login extends Component {
     this.auth.login(this.state.form)
     .then(json => {
       console.log("got to second then:", json)
-      if(json.error === "Invalid Email or password.") {
+      if(json.error) {
         this.setState({
           errors: json.error,
-          errorMessage: "Invalid email and/or password.",
+          errorMessage: "Please enter a valid email and/or password.",
           messageColor: "red"
         })
         console.log("!! ERRORS !!", json.errors);

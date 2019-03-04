@@ -109,7 +109,7 @@ class CreateApartment extends Component {
           </div>
 
           
-          <button style={{marginTop: '20px'}} type="submit" className="btn btn-primary">Create</button>
+          <button style={{margin: '20px'}} type="submit" className="btn btn-primary">Create</button>
           </fieldset>
         </form>
 

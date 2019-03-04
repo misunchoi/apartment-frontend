@@ -27,7 +27,7 @@ class Header extends Component {
       if (this.props.auth.loggedIn()) {
         return(
           <nav style={{marginBottom: '20px'}} className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand" href="/">Apartment App</a>
+            <a className="navbar-brand" href="/">Apartment Hunters</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation" onClick={this.handleToggle}>
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -46,7 +46,7 @@ class Header extends Component {
               </ul>
               <ul className="navbar-nav my-2 my-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link" onClick={this.logout} href="/">Logout</a>
+                  <a className="nav-link" onClick={this.logout} href="/login">Logout</a>
                 </li>
               </ul>
             </div>

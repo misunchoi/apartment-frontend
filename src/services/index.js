@@ -59,8 +59,12 @@ export default class AuthService {
 	// The token is stored in the browser
 	setToken(token) {
 		console.log(token);
-		let parsedToken = token.split('.')[1]
-		localStorage.setItem('id_token', parsedToken)
+		if (token !== null) {
+			let parsedToken = token.split('.')[1]
+			localStorage.setItem('id_token', parsedToken)
+		} else {
+			return console.log("token is null")
+		}
 	}
 
 	// Fetch the token from local storage

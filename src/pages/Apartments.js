@@ -32,23 +32,29 @@ class Apartments extends Component {
       <div>
         <h3>All Apartments</h3><br/>
         <div style={cards}>
-          {this.state.apartments.map(el => {
-            return (
-              <div key={el.id} className="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>
-                <div className="card-header">Apartment No.{el.id}</div>
-                <div className="card-body">
-                  <h4 className="card-title">
-                    {el.city}, {el.state}
-                  </h4>
-                  <p className="card-text">
-                    Manager: {el.building_manager} <br/>
-                    Phone: {el.manager_phone} <br/><br/>
-                    <a className="btn btn-primary" href={`/apartments/${el.id}`}>Details</a>
-                  </p>
-                </div>
-              </div>
-            )
-          })}
+          {this.state.apartments.length === 0 
+            ? 
+              <div>Loading Apartments...</div> 
+
+            : 
+              this.state.apartments.map(el => {
+                return (
+                  <div key={el.id} className="card border-primary mb-3" style={{minWidth: "20rem", margin: '20px'}}>
+                    <div className="card-header">Apartment No.{el.id}</div>
+                    <div className="card-body">
+                      <h4 className="card-title">
+                        {el.city}, {el.state}
+                      </h4>
+                      <p className="card-text">
+                        Manager: {el.building_manager} <br/>
+                        Phone: {el.manager_phone} <br/><br/>
+                        <a className="btn btn-primary" href={`/apartments/${el.id}`}>Details</a>
+                      </p>
+                    </div>
+                  </div>
+                )
+              })
+          }
         </div>
       </div>
     );

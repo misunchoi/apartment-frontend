@@ -25,7 +25,6 @@ let getUserApartments = function(user_id) {
 }
 
 let createApartment = function(apt) {
-  console.log(apt)
   return fetch( BASE + `/apartments`, {
     body: JSON.stringify(apt),
     headers: {
@@ -35,13 +34,11 @@ let createApartment = function(apt) {
   })
   .then((resp) => {
     let json = resp
-    console.log(json);
     return json
   })
 }
 
 let destroyApartment = function(id) {
-  console.log(id);
   return fetch(BASE + `/apartments/${id}`, {
     body: JSON.stringify(id),
     headers: {
@@ -51,13 +48,11 @@ let destroyApartment = function(id) {
   })
     .then((resp) => {
       let json = resp
-      console.log(json);
       return json
     })
 }
 
 let editApartment = function(aptObj) {
-  console.log(aptObj.id);
   return fetch(BASE + `/apartments/${aptObj.id}`, {
     method: "PATCH",
     body: JSON.stringify(aptObj),
@@ -67,7 +62,6 @@ let editApartment = function(aptObj) {
   })
   .then(resp => {
     let json = resp
-    console.log(json.errors);
     return json
   })
 }

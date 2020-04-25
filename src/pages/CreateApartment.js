@@ -124,21 +124,17 @@ class CreateApartment extends Component {
     this.setState ({
       form
     })
-    console.log(this.state.form);
   }
 
   onSubmit = (e) => {
     e.preventDefault()
     createApartment(this.state.form)
     .then(json => {
-      console.log("got to second then:", json)
       if(json.errors) {
-        console.log("!! ERRORS !!", json.errors);
         this.setState({
           errors: json.errors
         })
       } else {
-        console.log("i am else");
         this.setState ({
           successApt: true
         })

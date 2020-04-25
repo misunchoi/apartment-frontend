@@ -25,8 +25,6 @@ class Apartments extends Component {
   }
 
   render() {
-    console.log(this.state.apartments);
-
     return (
       <div>
         <h3>All Apartments</h3>

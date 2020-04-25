@@ -1,12 +1,11 @@
 import decode from 'jwt-decode'
 
 export default class AuthService {
-	constructor(domain) {
+	constructor() {
 		this.domain = 'https://apartment-app-backend.herokuapp.com'
 	}
 
 	login = (credentials) => {
-		console.log(credentials)
 		return this.authFetch(`${this.domain}/users/sign_in`, {
 			method: "POST",
 			body: JSON.stringify(credentials),
@@ -14,7 +13,6 @@ export default class AuthService {
 		.then(statusResponse => {
 			let token = statusResponse.headers.get('Authorization')
 			// set a JWT token in local storage, taken out of response from API
-			console.log(token);
 			this.setToken(token)
 			//return json from response
 			return statusResponse.json()
@@ -29,7 +27,6 @@ export default class AuthService {
 		.then(statusResponse => {
 			let token = statusResponse.headers.get('Authorization')
 			// set a JWT token in local storage, taken out of response from API
-			console.log(token);
 			this.setToken(token)
 			//return json from response
 			return statusResponse.json()
@@ -58,7 +55,6 @@ export default class AuthService {
 
 	// The token is stored in the browser
 	setToken(token) {
-		console.log(token);
 		if (token !== null) {
 			let parsedToken = token.split('.')[1]
 			localStorage.setItem('id_token', parsedToken)
@@ -79,7 +75,6 @@ export default class AuthService {
 
 	getUserId = () => {
 		const token = decode(this.getToken(), { header: true });
-		console.log(token);
 		return token.sub
 	}
 

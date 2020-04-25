@@ -4,8 +4,9 @@
   flex-direction: column;
   background: white;
   text-align: center;
-  background-image: url('./components/background.png');
-  background-size: 100vh;
+  background-image: url('./components/apartment-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .site-content {
